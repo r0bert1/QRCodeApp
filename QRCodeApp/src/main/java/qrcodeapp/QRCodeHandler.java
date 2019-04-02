@@ -41,5 +41,5 @@ public class QRCodeHandler {
             return null;
         }
     }
-
+    
 }
