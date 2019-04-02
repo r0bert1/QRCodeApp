@@ -6,15 +6,16 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import static qrcodeapp.QRCodeHandler.decodeQRCode;
-import static qrcodeapp.QRCodeHandler.generateQRCodeImage;
+import qrcodeapp.QRCodeHandler;
 
 public class QRCodeHandlerTest {
+    
+    QRCodeHandler qrh = new QRCodeHandler();
     
     @Before
     public void setUp() {
         try {
-            generateQRCodeImage("Testing...", 350, 350, "./TestQRCode.png");
+            qrh.generateQRCodeImage("Testing...", 350, 350, "./TestQRCode.png");
         } catch (IOException e) {
             System.out.println("Could not decode QR Code, IOException :: " + e.getMessage());
         } catch (WriterException e) {
@@ -38,7 +39,7 @@ public class QRCodeHandlerTest {
     public void imageWithoutQRCodeFailsToDecode() {
         try {
             File file = new File("BlankTestImage.png");
-            assertEquals(null, decodeQRCode(file));
+            assertEquals(null, qrh.decodeQRCode(file));
         } catch (IOException e) {
             System.out.println("Could not decode QR Code, IOException :: " + e.getMessage());
         }
@@ -48,11 +49,10 @@ public class QRCodeHandlerTest {
     public void imageWithQRCodeDecodesProperly() {
         try {
             File file = new File("TestQRCode.png");
-            assertEquals("Testing...", decodeQRCode(file));
+            assertEquals("Testing...", qrh.decodeQRCode(file));
         } catch (IOException e) {
             System.out.println("Could not decode QR Code, IOException :: " + e.getMessage());
         }
     }
-    
     
 }

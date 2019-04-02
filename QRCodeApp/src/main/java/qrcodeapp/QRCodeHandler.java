@@ -18,9 +18,8 @@ import java.nio.file.FileSystems;
 import java.nio.file.Path;
 
 public class QRCodeHandler {
-    private static final String QR_CODE_IMAGE_PATH = "./MyQRCode.png";
 
-    public static void generateQRCodeImage(String text, int width, int height, String filePath)
+    public void generateQRCodeImage(String text, int width, int height, String filePath)
             throws WriterException, IOException {
         QRCodeWriter qrCodeWriter = new QRCodeWriter();
         BitMatrix bitMatrix = qrCodeWriter.encode(text, BarcodeFormat.QR_CODE, width, height);
@@ -29,7 +28,7 @@ public class QRCodeHandler {
         MatrixToImageWriter.writeToPath(bitMatrix, "PNG", path);
     }
     
-    public static String decodeQRCode(File qrCodeimage) throws IOException {
+    public String decodeQRCode(File qrCodeimage) throws IOException {
         BufferedImage bufferedImage = ImageIO.read(qrCodeimage);
         LuminanceSource source = new BufferedImageLuminanceSource(bufferedImage);
         BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
@@ -43,25 +42,4 @@ public class QRCodeHandler {
         }
     }
 
-    public static void main(String[] args) {
-        /*try {
-            generateQRCodeImage("Hello world!", 350, 350, QR_CODE_IMAGE_PATH);
-        } catch (WriterException e) {
-            System.out.println("Could not generate QR Code, WriterException :: " + e.getMessage());
-        } catch (IOException e) {
-            System.out.println("Could not generate QR Code, IOException :: " + e.getMessage());
-        }*/
-        
-        try {
-            File file = new File("MyQRCode.png");
-            String decodedText = decodeQRCode(file);
-            if(decodedText == null) {
-                System.out.println("No QR Code found in the image");
-            } else {
-                System.out.println("Decoded text = " + decodedText);
-            }
-        } catch (IOException e) {
-            System.out.println("Could not decode QR Code, IOException :: " + e.getMessage());
-        }
-    }
 }
