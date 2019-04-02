@@ -20,7 +20,7 @@ import java.nio.file.Path;
 public class QRCodeHandler {
     private static final String QR_CODE_IMAGE_PATH = "./MyQRCode.png";
 
-    private static void generateQRCodeImage(String text, int width, int height, String filePath)
+    public static void generateQRCodeImage(String text, int width, int height, String filePath)
             throws WriterException, IOException {
         QRCodeWriter qrCodeWriter = new QRCodeWriter();
         BitMatrix bitMatrix = qrCodeWriter.encode(text, BarcodeFormat.QR_CODE, width, height);
@@ -29,7 +29,7 @@ public class QRCodeHandler {
         MatrixToImageWriter.writeToPath(bitMatrix, "PNG", path);
     }
     
-    private static String decodeQRCode(File qrCodeimage) throws IOException {
+    public static String decodeQRCode(File qrCodeimage) throws IOException {
         BufferedImage bufferedImage = ImageIO.read(qrCodeimage);
         LuminanceSource source = new BufferedImageLuminanceSource(bufferedImage);
         BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
