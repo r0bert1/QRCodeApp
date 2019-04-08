@@ -39,7 +39,7 @@ public class QRCodeHandlerTest {
     public void imageWithoutQRCodeFailsToDecode() {
         try {
             File file = new File("BlankTestImage.png");
-            assertEquals(null, qrh.decodeQRCode(file));
+            assertEquals(null, qrh.decodeQRCodeFromStorage(file));
         } catch (IOException e) {
             System.out.println("Could not decode QR Code, IOException :: " + e.getMessage());
         }
@@ -49,7 +49,7 @@ public class QRCodeHandlerTest {
     public void imageWithQRCodeDecodesProperly() {
         try {
             File file = new File("TestQRCode.png");
-            assertEquals("Testing...", qrh.decodeQRCode(file));
+            assertEquals("Testing...", qrh.decodeQRCodeFromStorage(file));
         } catch (IOException e) {
             System.out.println("Could not decode QR Code, IOException :: " + e.getMessage());
         }
