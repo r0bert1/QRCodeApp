@@ -9,3 +9,4 @@
 | 8.4.  | 1    | Sarxos webcam capture kirjastoon perehtyminen |
 | 8.4.  | 2    | Webcamillä kuvatun QR-koodin lukutoiminnallisuuden koodaus |
 | 8.4.  | 0.5  | Projektin pakkausrakenteen korjaus ja checkstylen käyttöönotto |
+| yht.  | 10.5 | |
