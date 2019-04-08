@@ -43,8 +43,8 @@ public class QRCodeHandler {
         }
     }
     
-    public String decodeQRCodeFromStorage(File QRCode) throws IOException {
-        BufferedImage image = ImageIO.read(QRCode);
+    public String decodeQRCodeFromStorage(File qrCode) throws IOException {
+        BufferedImage image = ImageIO.read(qrCode);
         String decodedText = decodeQRCode(image);
         return decodedText;
     }
