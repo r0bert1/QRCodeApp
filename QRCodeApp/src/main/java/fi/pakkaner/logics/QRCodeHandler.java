@@ -1,4 +1,4 @@
-package qrcodeapp;
+package fi.pakkaner.logics;
 
 import com.github.sarxos.webcam.Webcam;
 
@@ -30,7 +30,7 @@ public class QRCodeHandler {
         MatrixToImageWriter.writeToPath(bitMatrix, "PNG", path);
     }
     
-    public String decodeQRCode(BufferedImage image) throws IOException {
+    private String decodeQRCode(BufferedImage image) throws IOException {
         LuminanceSource source = new BufferedImageLuminanceSource(image);
         BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
 

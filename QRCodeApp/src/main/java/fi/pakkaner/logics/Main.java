@@ -1,4 +1,4 @@
-package qrcodeapp;
+package fi.pakkaner.logics;
 
 import java.io.IOException;
 

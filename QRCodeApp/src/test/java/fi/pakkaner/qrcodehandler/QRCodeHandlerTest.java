@@ -1,3 +1,4 @@
+package fi.pakkaner.qrcodehandler;
 
 import com.google.zxing.WriterException;
 import java.io.File;
@@ -6,7 +7,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import qrcodeapp.QRCodeHandler;
+import fi.pakkaner.logics.QRCodeHandler;
 
 public class QRCodeHandlerTest {
     
