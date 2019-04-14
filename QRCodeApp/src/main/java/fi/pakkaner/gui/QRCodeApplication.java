@@ -18,24 +18,15 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.embed.swing.SwingFXUtils;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
 
 public class QRCodeApplication extends Application {
@@ -46,8 +37,7 @@ public class QRCodeApplication extends Application {
     private Label decodedText;
     private Webcam webCam = null;
     private boolean stopCamera = false;
-    private BufferedImage grabbedImage;
-    private ObjectProperty<Image> imageProperty = new SimpleObjectProperty<Image>();
+    private ObjectProperty<Image> imageProperty = new SimpleObjectProperty<>();
 
     @Override
     public void start(Stage primaryStage) {
@@ -115,12 +105,8 @@ public class QRCodeApplication extends Application {
                             ref.set(SwingFXUtils.toFXImage(img, ref.get()));
                             img.flush();
 
-                            Platform.runLater(new Runnable() {
-
-                                @Override
-                                public void run() {
-                                    imageProperty.set(ref.get());
-                                }
+                            Platform.runLater(() -> {
+                                imageProperty.set(ref.get());
                             });
                         }
                     } catch (Exception e) {
@@ -155,12 +141,8 @@ public class QRCodeApplication extends Application {
                             Result result = new MultiFormatReader().decode(bitmap);
 
                             if (result != null) {
-                                Platform.runLater(new Runnable() {
-
-                                    @Override
-                                    public void run() {
-                                        decodedText.setText(result.getText());
-                                    }
+                                Platform.runLater(() -> {
+                                    decodedText.setText(result.getText());
                                 });
                             }
                         }
