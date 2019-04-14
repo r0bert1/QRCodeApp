@@ -16,7 +16,7 @@ public class QRCodeHandlerTest {
     @Before
     public void setUp() {
         try {
-            qrh.generateQRCodeImage("Testing...", 350, 350, "./TestQRCode.png");
+            qrh.generateQRCode("Testing...", 350, 350, "./TestQRCode.png");
         } catch (IOException e) {
             System.out.println("Could not decode QR Code, IOException :: " + e.getMessage());
         } catch (WriterException e) {
