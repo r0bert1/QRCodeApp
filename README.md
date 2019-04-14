@@ -6,5 +6,7 @@ Sovelluksen avulla käyttäjien on mahdollista lukea ja luoda QR-koodeja.
 
 [Työaikakirjanpito](https://github.com/r0bert1/ot-harjoitustyo/blob/master/dokumentaatio/tuntikirjanpito.md)
 
+[Arkkitehtuuri](https://github.com/r0bert1/ot-harjoitustyo/blob/master/dokumentaatio/arkkitehtuuri.md)
+
 
 

@@ -1,6 +1,5 @@
 ## Luokkakaavio
 
-Sovelluksessa on toistaiseksi vain luokka QRCodeHandler, joka vastaa sovelluslogiikasta.
+Sovelluksessa on toistaiseksi vain sovelluslogiikasta vastaava luokka QRCodeHandler.
 
-![Class diagram](/Downloads/QRCode_diagram.png)
-Format: ![Alt Text](url)
+<img src="https://github.com/r0bert1/ot-harjoitustyo/blob/master/dokumentaatio/kuvat/QRCode_diagram.png" >
