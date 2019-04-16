@@ -13,6 +13,7 @@ import com.google.zxing.NotFoundException;
 import com.google.zxing.Result;
 import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
 import com.google.zxing.common.HybridBinarizer;
+import java.io.File;
 
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -22,12 +23,16 @@ import javafx.concurrent.Task;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import javafx.geometry.Insets;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 
 public class QRCodeApplication extends Application {
 
@@ -44,27 +49,141 @@ public class QRCodeApplication extends Application {
 
         primaryStage.setTitle("QRCodeApplication");
 
-        root = new BorderPane();
+        // initial scene
+        
+        BorderPane root1 = new BorderPane();
+        root1.setStyle("-fx-background-color: #ccc;");
+        Insets insets = new Insets(10);
+        
+        GridPane menuPane = new GridPane();
+        menuPane.setHgap(10);
+        menuPane.setVgap(12);
+        
+        Label scanLbl = new Label("Scan a QR code");
+        BorderPane.setMargin(scanLbl, insets);
+        Button goScanBtn = new Button("Scan");
+        
+        Label generateLbl = new Label("Generate your own QR code");
+        Button goGenerateBtn = new Button("Generate");
 
+        menuPane.add(scanLbl, 0, 0);
+        menuPane.add(goScanBtn, 0, 1);
+        menuPane.add(generateLbl, 2, 0);
+        menuPane.add(goGenerateBtn, 2, 1);
+        
+        BorderPane.setAlignment(menuPane, Pos.CENTER);
+        
+        menuPane.setAlignment(Pos.CENTER);
+        
+        root1.setCenter(menuPane);
+
+        // scan scene
+        
+        root = new BorderPane();
+        
+        GridPane scanPane = new GridPane();
+        scanPane.setHgap(10);
+        scanPane.setVgap(12);
+        
         root.setStyle("-fx-background-color: #ccc;");
         imgWebCamCapturedImage = new ImageView();
-        decodedText = new Label("Placeholder");
-        decodedText.setPrefHeight(40);
-        BorderPane.setAlignment(decodedText, Pos.BOTTOM_CENTER);
+        Label infoLbl = new Label("Decoded text: ");
+        decodedText = new Label("");
+        Button backButton = new Button("Back");
+        
+        scanPane.add(infoLbl, 0, 0);
+        scanPane.add(decodedText, 1, 0);
+        scanPane.add(backButton, 2, 0);
+        
+        scanPane.setAlignment(Pos.CENTER);
+        
         root.setCenter(imgWebCamCapturedImage);
-        root.setBottom(decodedText);
+        root.setBottom(scanPane);
 
-        initializeWebCam(0);
+        // generate scene
+        
+        BorderPane root2 = new BorderPane();
+        root2.setPadding(new Insets(10));
+        
+        
+        root2.setStyle("-fx-background-color: #ccc;");
+        ImageView generatedImgView = new ImageView();
+        Label imageName = new Label();
+        
+        BorderPane.setAlignment(imageName, Pos.CENTER);
+        
+        GridPane imagePropertyPane = new GridPane();
+        imagePropertyPane.setHgap(10);
+        imagePropertyPane.setVgap(12);
+        
+        Label textLabel = new Label("Text to encode:");
+        TextField textInput = new TextField();
+        
+        Label nameLabel = new Label("Filename:");
+        TextField nameInput = new TextField();
+        
+        Button generateButton = new Button("Generate");
 
-        primaryStage.setScene(new Scene(root));
-        primaryStage.setHeight(700);
+        imagePropertyPane.add(textLabel, 0, 0);
+        imagePropertyPane.add(textInput, 1, 0);
+        imagePropertyPane.add(nameLabel, 0, 1);
+        imagePropertyPane.add(nameInput, 1, 1);
+        imagePropertyPane.add(generateButton, 1, 2);
+        imagePropertyPane.add(backButton, 2, 2);
+        
+        
+        imagePropertyPane.setAlignment(Pos.CENTER);
+        
+        root2.setTop(imageName);
+        root2.setCenter(generatedImgView);
+        root2.setBottom(imagePropertyPane);
+        
+        // scenes
+        
+        Scene initial = new Scene(root1);
+        Scene generate = new Scene(root2);
+        Scene scan = new Scene(root);
+        
+        // button click handlers
+        
+        goScanBtn.setOnAction(e -> {
+            initializeWebCam(0);
+            primaryStage.setScene(scan);
+        });
+        
+        goGenerateBtn.setOnAction(e -> {
+            primaryStage.setScene(generate);
+        });
+        
+        generateButton.setOnAction(e -> {
+            try {
+                String text = textInput.getText();
+                String name = nameInput.getText();
+                
+                qrch.generateQRCode(text, 400, 400, "./images/" + name);
+                File file = new File("./images/" + name);
+                Image generatedImg = new Image(file.toURI().toString());
+                generatedImgView.setImage(generatedImg);
+                imageName.setText(name);
+            } catch (Exception ex) {
+                System.out.println("Failed to generate qr code");
+            }
+        });
+        
+        backButton.setOnAction(e -> {
+            primaryStage.setScene(initial);
+        });
+        
+        // Setting initial scene
+
+        primaryStage.setScene(initial);
+        primaryStage.setHeight(600);
         primaryStage.setWidth(600);
         primaryStage.centerOnScreen();
         primaryStage.show();
     }
 
     protected void initializeWebCam(final int webCamIndex) {
-
         Task<Void> webCamTask = new Task<Void>() {
 
             @Override
@@ -87,9 +206,6 @@ public class QRCodeApplication extends Application {
     }
 
     protected void startWebCamStream() {
-
-        stopCamera = false;
-
         Task<Void> task = new Task<Void>() {
 
             @Override
@@ -98,7 +214,7 @@ public class QRCodeApplication extends Application {
                 final AtomicReference<WritableImage> ref = new AtomicReference<>();
                 BufferedImage img = null;
 
-                while (!stopCamera) {
+                while (webCam.isOpen()) {
                     try {
                         if ((img = webCam.getImage()) != null) {
 
@@ -110,11 +226,10 @@ public class QRCodeApplication extends Application {
                             });
                         }
                     } catch (Exception e) {
-
                         e.printStackTrace();
                     }
                 }
-
+                
                 return null;
             }
         };
@@ -131,7 +246,7 @@ public class QRCodeApplication extends Application {
 
             @Override
             protected Void call() throws Exception {
-                while (!stopCamera) {
+                while (webCam.isOpen()) {
                     try {
                         if ((webCam.getImage()) != null) {
 
@@ -147,8 +262,7 @@ public class QRCodeApplication extends Application {
                             }
                         }
                     } catch (NotFoundException e) {
-                        // Most likely no qr code was found in image
-                        //e.printStackTrace();
+                        // No qr code was found in image
                     }
                 }
 
