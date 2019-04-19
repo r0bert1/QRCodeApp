@@ -33,6 +33,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Region;
 
 public class QRCodeApplication extends Application {
 
@@ -80,6 +81,8 @@ public class QRCodeApplication extends Application {
         // scan scene
         
         root = new BorderPane();
+        root.setPadding(new Insets(10, 10, 10, 10));
+        
         
         GridPane scanPane = new GridPane();
         scanPane.setHgap(10);
@@ -88,17 +91,28 @@ public class QRCodeApplication extends Application {
         root.setStyle("-fx-background-color: #ccc;");
         imgWebCamCapturedImage = new ImageView();
         Label infoLbl = new Label("Decoded text: ");
-        decodedText = new Label("");
-        Button backButton = new Button("Back");
+        decodedText = new Label("No QR code detected yet.");
+        BorderPane.setAlignment(decodedText, Pos.CENTER);
+        
+        Button backBtn1 = new Button("Back");
+        
+        BorderPane pane = new BorderPane();
+        BorderPane.setAlignment(backBtn1, Pos.BOTTOM_RIGHT);
         
         scanPane.add(infoLbl, 0, 0);
         scanPane.add(decodedText, 1, 0);
-        scanPane.add(backButton, 2, 0);
         
-        scanPane.setAlignment(Pos.CENTER);
+        pane.setCenter(scanPane);
+        pane.setBottom(backBtn1);
+        
+        
+        
+        
+        //scanPane.setAlignment(Pos.CENTER);
         
         root.setCenter(imgWebCamCapturedImage);
-        root.setBottom(scanPane);
+        root.setBottom(backBtn1);
+        root.setTop(decodedText);
 
         // generate scene
         
@@ -122,21 +136,28 @@ public class QRCodeApplication extends Application {
         Label nameLabel = new Label("Filename:");
         TextField nameInput = new TextField();
         
-        Button generateButton = new Button("Generate");
+        Button generateBtn = new Button("Generate");
+        Button backBtn2 = new Button("Back");
+        BorderPane.setAlignment(backBtn2, Pos.BOTTOM_RIGHT);
+        
+        BorderPane base = new BorderPane();
 
         imagePropertyPane.add(textLabel, 0, 0);
         imagePropertyPane.add(textInput, 1, 0);
         imagePropertyPane.add(nameLabel, 0, 1);
         imagePropertyPane.add(nameInput, 1, 1);
-        imagePropertyPane.add(generateButton, 1, 2);
-        imagePropertyPane.add(backButton, 2, 2);
+        imagePropertyPane.add(generateBtn, 1, 2);
+        
         
         
         imagePropertyPane.setAlignment(Pos.CENTER);
+        base.setCenter(imagePropertyPane);
+        base.setBottom(backBtn2);
         
         root2.setTop(imageName);
         root2.setCenter(generatedImgView);
-        root2.setBottom(imagePropertyPane);
+        root2.setBottom(base);
+        //root.setBottom(imagePropertyPane);
         
         // scenes
         
@@ -155,7 +176,7 @@ public class QRCodeApplication extends Application {
             primaryStage.setScene(generate);
         });
         
-        generateButton.setOnAction(e -> {
+        generateBtn.setOnAction(e -> {
             try {
                 String text = textInput.getText();
                 String name = nameInput.getText();
@@ -170,7 +191,12 @@ public class QRCodeApplication extends Application {
             }
         });
         
-        backButton.setOnAction(e -> {
+        backBtn1.setOnAction(e -> {
+            primaryStage.setScene(initial);
+            webCam.close();
+        });
+        
+        backBtn2.setOnAction(e -> {
             primaryStage.setScene(initial);
         });
         
@@ -178,7 +204,7 @@ public class QRCodeApplication extends Application {
 
         primaryStage.setScene(initial);
         primaryStage.setHeight(600);
-        primaryStage.setWidth(600);
+        primaryStage.setWidth(700);
         primaryStage.centerOnScreen();
         primaryStage.show();
     }
