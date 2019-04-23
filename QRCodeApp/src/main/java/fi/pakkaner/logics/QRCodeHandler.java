@@ -49,10 +49,7 @@ public class QRCodeHandler {
         return decodedText;
     }
     
-    public String decodeQRCodeFromWebcam() throws IOException {
-        Webcam webcam = Webcam.getDefault();
-        webcam.open();
-        
+    public String decodeQRCodeFromWebcam(Webcam webcam) throws IOException {
         BufferedImage image = webcam.getImage();
         String decodedText = decodeQRCode(image);
         return decodedText;

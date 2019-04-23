@@ -6,13 +6,6 @@ import java.awt.image.BufferedImage;
 import java.util.concurrent.atomic.AtomicReference;
 
 import com.github.sarxos.webcam.Webcam;
-import com.google.zxing.BinaryBitmap;
-import com.google.zxing.LuminanceSource;
-import com.google.zxing.MultiFormatReader;
-import com.google.zxing.NotFoundException;
-import com.google.zxing.Result;
-import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
-import com.google.zxing.common.HybridBinarizer;
 import java.io.File;
 
 import javafx.application.Application;
@@ -144,13 +137,13 @@ public class QRCodeApplication extends Application {
         root2.setCenter(generatedImgView);
         root2.setBottom(base);
         
-        // scenes
+        // Scenes
         
         Scene start = new Scene(root1);
         Scene generate = new Scene(root2);
         Scene scan = new Scene(root);
         
-        // button click handlers
+        // Button click handlers
         
         goScanBtn.setOnAction(e -> {
             initializeWebCam(0);
@@ -241,7 +234,7 @@ public class QRCodeApplication extends Application {
             protected Void call() throws Exception {
 
                 final AtomicReference<WritableImage> ref = new AtomicReference<>();
-                BufferedImage img = null;
+                BufferedImage img;
 
                 while (webCam.isOpen()) {
                     try {
@@ -276,22 +269,14 @@ public class QRCodeApplication extends Application {
             @Override
             protected Void call() throws Exception {
                 while (webCam.isOpen()) {
-                    try {
-                        if ((webCam.getImage()) != null) {
+                    if ((webCam.getImage()) != null) {
+                        String result = qrch.decodeQRCodeFromWebcam(webCam);
 
-                            BufferedImage image = webCam.getImage();
-                            LuminanceSource source = new BufferedImageLuminanceSource(image);
-                            BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
-                            Result result = new MultiFormatReader().decode(bitmap);
-
-                            if (result != null) {
-                                Platform.runLater(() -> {
-                                    decodedText.setText(result.getText());
-                                });
-                            }
+                        if (result != null) {
+                            Platform.runLater(() -> {
+                                decodedText.setText(result);
+                            });
                         }
-                    } catch (NotFoundException e) {
-                        // No qr code was found in image
                     }
                 }
 
