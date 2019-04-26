@@ -58,7 +58,7 @@
                 <version>0.8.0</version>
                 <configuration>
                     <excludes>
-                        <exclude>fi/pakkaner/gui/*</exclude>
+                        <exclude>qrcodeapp/ui/*</exclude>
                     </excludes>
                 </configuration>    
                 <executions>
@@ -96,7 +96,7 @@
                         <configuration>
                             <transformers>
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>fi.pakkaner.gui.QRCodeApplication</mainClass>
+                                    <mainClass>qrcodeapp.ui.QRCodeApplication</mainClass>
                                 </transformer>
                             </transformers>
                         </configuration>

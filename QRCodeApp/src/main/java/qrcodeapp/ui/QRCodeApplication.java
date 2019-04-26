@@ -1,6 +1,6 @@
-package fi.pakkaner.gui;
+package qrcodeapp.ui;
 
-import fi.pakkaner.logics.QRCodeHandler;
+import qrcodeapp.domain.QRCodeHandler;
 
 import java.awt.image.BufferedImage;
 import java.util.concurrent.atomic.AtomicReference;

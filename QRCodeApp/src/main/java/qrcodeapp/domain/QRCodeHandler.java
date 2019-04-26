@@ -1,4 +1,4 @@
-package fi.pakkaner.logics;
+package qrcodeapp.domain;
 
 import com.github.sarxos.webcam.Webcam;
 
@@ -38,7 +38,7 @@ public class QRCodeHandler {
             Result result = new MultiFormatReader().decode(bitmap);
             return result.getText();
         } catch (NotFoundException e) {
-            System.out.println("There is no QR code in the image");
+            // No QR code is detected
             return null;
         }
     }
