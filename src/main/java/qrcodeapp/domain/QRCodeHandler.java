@@ -32,9 +32,6 @@ public class QRCodeHandler {
      * @param width Width of QR code image
      * @param height Height of QR code image
      * @param filePath Path of the generated image
-     * 
-     * @throws WriterException
-     * @throws IOException
      */
     public void generateQRCode(String text, int width, int height, String filePath)
             throws WriterException, IOException {
@@ -51,8 +48,6 @@ public class QRCodeHandler {
      * @param image A BufferedImage object generated from QR code image
      * 
      * @return Decoded data as a string
-     * 
-     * @throws IOException
      */
     public String decodeQRCode(BufferedImage image) throws IOException {
         LuminanceSource source = new BufferedImageLuminanceSource(image);
@@ -74,8 +69,6 @@ public class QRCodeHandler {
      * @param qrCode Image file to be decoded
      * 
      * @return Decoded data as a string
-     * 
-     * @throws IOException
      */
     public String decodeQRCodeFromStorage(File qrCode) throws IOException {
         BufferedImage image = ImageIO.read(qrCode);
@@ -90,8 +83,6 @@ public class QRCodeHandler {
      * @param webcam Webcam that will be used for scanning
      * 
      * @return Decoded data as a string
-     * 
-     * @throws IOException
      */
     public String decodeQRCodeFromWebcam(Webcam webcam) throws IOException {
         BufferedImage image = webcam.getImage();
