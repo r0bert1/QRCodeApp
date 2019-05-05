@@ -4,8 +4,9 @@
 
 Koodin pakkausrakenne:
 
-<img src="dokumentaatio/kuvat/pakkausrakenne.png">
+<img src="https://github.com/r0bert1/QRCodeApp/blob/master/dokumentaatio/kuvat/pakkausrakenne.png">
 
+qrcodeapp.ui sisältää käyttöliittymän ja qrcodeapp.domain sisältää sovelluslogiikan. 
 
 ## Luokkakaavio
 
