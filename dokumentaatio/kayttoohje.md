@@ -1,6 +1,6 @@
 # Käyttöohje
 
-Lataa tiedosto [qrcodeapp.jar](https://github.com/r0bert1/ot-harjoitustyo/releases/tag/viikko6)
+Lataa tiedosto [qrcodeapp.jar](https://github.com/r0bert1/QRCodeApp/releases/tag/loppupalautus)
 
 ## Ohjelman käynnistäminen
 
