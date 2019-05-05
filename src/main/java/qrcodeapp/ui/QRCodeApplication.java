@@ -167,7 +167,7 @@ public class QRCodeApplication extends Application {
         generateBtn.setOnAction(e -> {
             try {
                 String text = textInput.getText();
-                String name = nameInput.getText();
+                String name = nameInput.getText() + ".png";
                 String targetDir = dirFld.getText();
                 
                 qrch.generateQRCode(text, 400, 400, targetDir + "/" + name);
