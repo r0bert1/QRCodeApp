@@ -38,8 +38,12 @@ Käyttäjän painettua aloitusvalikon _Scan_ painiketta etenee sovelluksen kontr
 
 <img src="https://github.com/r0bert1/QRCodeApp/blob/master/dokumentaatio/kuvat/scansequence.png" >
 
+_Scan_ painikkeen tapahtumakäsittelijä vaihtaa näkymää, ja kutsuu metodia initializeWebCam, joka puolestaan kutsuu metodia scan. Scan metodi kutsuu silmukassa metodia decodeQRCodeFromWebCam niin kauan kunnes käyttäjä joko vaihtaa näkymää tai sulkee sovelluksen. Aina löytäessään QR-koodin decodeQRCodeFromWebCam palauttaa löytämänsä koodin tekstin, joka asetetaan käyttäjän näkyville tekstikenttään.  
+
 ### QR-koodin luominen
 
 Käyttäjän syötettyä tarvittavat tiedot ja painettua _Generate_ painiketta generointinäkymässä etenee sovelluksen kontrolli seuraavasti:
 
 <img src="https://github.com/r0bert1/QRCodeApp/blob/master/dokumentaatio/kuvat/generatesequence.png" >
+
+_Generate_ painikkeen tapahtumakäsittelijä kutsuu generateQRCode metodia, joka puolestaan luo QR-koodi kuvan ja tallettaa sen käyttäjän valitsemaan kansioon. Tapahtumakäsittelijä myös asettaa generoidun kuvan käyttäjän nähtäville tekstikenttien yläpuolelle.
