@@ -16,6 +16,7 @@ Sovelluksen avulla käyttäjien on mahdollista lukea ja luoda QR-koodeja.
 ## Releaset
 
 [Viikko 6](https://github.com/r0bert1/QRCodeApp/releases/tag/viikko6)
+
 [Loppupalautus](https://github.com/r0bert1/QRCodeApp/releases/tag/loppupalautus)
 
 ## Komentorivikomennot
