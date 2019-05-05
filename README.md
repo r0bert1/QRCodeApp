@@ -1,4 +1,4 @@
-# QR-code App
+# QR Code App
 Sovelluksen avulla käyttäjien on mahdollista lukea ja luoda QR-koodeja.
 
 ## Dokumentaatio
