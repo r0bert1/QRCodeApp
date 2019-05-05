@@ -4,7 +4,7 @@ Sovelluksen testaus on suoritettu automatisoiduilla yksikkötesteillä sekä man
 
 ## Yksikkötestaus
 
-QRCodeHandlerTest testaa sovelluksen logiikkaa eli QRCodeHandler luokan metodeja. QRCodeHandler-luokka sisältää pelkästään testejä varten luodun metodin decodeQRCodeFromStorage. 
+[QRCodeHandlerTest](https://github.com/r0bert1/QRCodeApp/blob/master/src/test/java/domain/QRCodeHandlerTest.java) testaa sovelluksen logiikkaa eli [QRCodeHandler](https://github.com/r0bert1/QRCodeApp/blob/master/src/main/java/qrcodeapp/domain/QRCodeHandler.java) luokan metodeja. QRCodeHandler-luokka sisältää pelkästään testejä varten luodun metodin [decodeQRCodeFromStorage](https://github.com/r0bert1/QRCodeApp/blob/master/src/main/java/qrcodeapp/domain/QRCodeHandler.java).
 Sen avulla voidaan testata skannausta valmiilla QR-koodi kuvilla, koska Web-kameran avulla tapahtuvaa skannausta on hyvin vaikea testata.
 
 ## Testikattavuus
