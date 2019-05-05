@@ -22,7 +22,7 @@ QR-koodin luku näkymään siirtyessä käyttöliittymä kutsuu [initializeWebCa
 
 ## Sovelluslogiikka
 
-Sovelluksen logiikasta vastaa luokka [QRCodeHandler](https://github.com/r0bert1/QRCodeApp/blob/master/src/main/java/qrcodeapp/domain/QRCodeHandler.java).
+Sovelluksen logiikasta vastaa luokka [QRCodeHandler](https://github.com/r0bert1/QRCodeApp/blob/master/src/main/java/qrcodeapp/domain/QRCodeHandler.java):
 
 <img src="https://github.com/r0bert1/ot-harjoitustyo/blob/master/dokumentaatio/kuvat/QRCode_diagram.png" >
 
