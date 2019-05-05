@@ -1,3 +1,12 @@
+# Arkkitehtuurikuvaus
+
+## Rakenne
+
+Koodin pakkausrakenne:
+
+<img src="dokumentaatio/kuvat/pakkausrakenne.png">
+
+
 ## Luokkakaavio
 
 Sovelluksessa on toistaiseksi vain sovelluslogiikasta vastaava luokka QRCodeHandler.
