@@ -30,7 +30,16 @@ Koko ohjelmaa kuvaava pakkaus/luokkakaavio:
 
 <img src="https://github.com/r0bert1/QRCodeApp/blob/master/dokumentaatio/kuvat/luokkarakenne.png" >
 
-## Päätoiminnallisuudet
+## Päätoiminnallisuudet sekvenssikaavioina
 
 ### QR-koodin lukeminen
 
+Käyttäjän painettua aloitusvalikon _Scan_ painiketta etenee sovelluksen kontrolli seuraavasti:
+
+<img src="https://github.com/r0bert1/QRCodeApp/blob/master/dokumentaatio/kuvat/scansequence.png" >
+
+### QR-koodin luominen
+
+Käyttäjän syötettyä tarvittavat tiedot ja painettua _Generate_ painiketta generointinäkymässä etenee sovelluksen kontrolli seuraavasti:
+
+<img src="https://github.com/r0bert1/QRCodeApp/blob/master/dokumentaatio/kuvat/generatesequence.png" >
