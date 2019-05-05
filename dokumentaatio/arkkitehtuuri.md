@@ -29,3 +29,8 @@ Sovelluksen logiikasta vastaa luokka [QRCodeHandler](https://github.com/r0bert1/
 Koko ohjelmaa kuvaava pakkaus/luokkakaavio:
 
 <img src="https://github.com/r0bert1/QRCodeApp/blob/master/dokumentaatio/kuvat/luokkarakenne.png" >
+
+## Päätoiminnallisuudet
+
+### QR-koodin lukeminen
+
